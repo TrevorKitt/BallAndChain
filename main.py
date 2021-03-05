@@ -31,6 +31,10 @@ class Ball(pg.sprite.Sprite):
     def move(self):
         for chain in self.chains:
             chain.pull()
+        if not 0 < self.get_next_location().y < self.app.height:
+            self.movement_vector.y = -self.movement_vector.y
+        if not 0 < self.get_next_location().x < self.app.width:
+            self.movement_vector.x = -self.movement_vector.x
         self.rect = self.rect.move(self.movement_vector.x, self.movement_vector.y)
         if self is self.app.grabbed_ball:
             self.movement_vector = pg.math.Vector2(0,0)
